@@ -1,0 +1,17 @@
+server:
+  port: 8071
+
+spring:
+  profiles:
+    active: prod
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+      url: jdbc:mysql://127.0.0.1:3306/douban?useUnicode=true&characterEncoding=utf-8&useSSL=true
+
+#jasypt加密的密匙
+jasypt:
+  encryptor:
+    password: NcQkWcPTf4APOwVLfsbJ9yHpNPPkEcYJ

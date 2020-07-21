@@ -1,0 +1,144 @@
+Java实现堆排序（大根堆）
+
+　　堆排序是一种树形选择排序方法，它的特点是：在排序的过程中，将array[0，...，n-1]看成是一颗完全二叉树的顺序存储结构，利用完全二叉树中双亲节点和孩子结点之间的内在关系，在当前无序区中选择关键字最大（最小）的元素。
+
+1. 若array[0，...，n-1]表示一颗完全二叉树的顺序存储模式，则双亲节点指针和孩子结点指针之间的内在关系如下：
+
+　　任意一节点指针 i：父节点：i==0 ? null : (i-1)/2
+
+　　　　　　　　　　  左孩子：2*i + 1
+
+　　　　　　　　　　  右孩子：2*i + 2
+
+2. 堆的定义：n个关键字序列array[0，...，n-1]，当且仅当满足下列要求：(0 <= i <= (n-1)/2)
+
+　　　　　　① array[i] <= array[2*i + 1] 且 array[i] <= array[2*i + 2]； 称为小根堆；
+
+　　　　　　② array[i] >= array[2*i + 1] 且 array[i] >= array[2*i + 2]； 称为大根堆；
+
+3. 建立大根堆：
+
+　　n个节点的完全二叉树array[0，...，n-1]，最后一个节点n-1是第(n-1-1)/2个节点的孩子。对第(n-1-1)/2个节点为根的子树调整，使该子树称为堆。
+
+　　对于大根堆，调整方法为：若【根节点的关键字】小于【左右子女中关键字较大者】，则交换。
+
+　　之后向前依次对各节点（(n-2)/2 - 1）~ 0为根的子树进行调整，看该节点值是否大于其左右子节点的值，若不是，将左右子节点中较大值与之交换，交换后可能会破坏下一级堆，于是继续采用上述方法构建下一级的堆，直到以该节点为根的子树构成堆为止。
+
+　　反复利用上述调整堆的方法建堆，直到根节点。
+
+4.堆排序：（大根堆）
+
+　　①将存放在array[0，...，n-1]中的n个元素建成初始堆；
+
+　　②将堆顶元素与堆底元素进行交换，则序列的最大值即已放到正确的位置；
+
+　　③但此时堆被破坏，将堆顶元素向下调整使其继续保持大根堆的性质，再重复第②③步，直到堆中仅剩下一个元素为止。
+
+堆排序算法的性能分析：
+
+　　空间复杂度:o(1)；
+
+　　时间复杂度:建堆：o(n)，每次调整o(log n)，故最好、最坏、平均情况下：o(n*logn);
+
+　　稳定性：不稳定
+
+
+
+建立大根堆的方法：
+
+
+ 1     //构建大根堆：将array看成完全二叉树的顺序存储结构
+ 2     private int[] buildMaxHeap(int[] array){
+ 3         //从最后一个节点array.length-1的父节点（array.length-1-1）/2开始，直到根节点0，反复调整堆
+ 4         for(int i=(array.length-2)/2;i>=0;i--){
+ 5             adjustDownToUp(array, i,array.length);
+ 6         }
+ 7         return array;
+ 8     }
+ 9
+10     //将元素array[k]自下往上逐步调整树形结构
+11     private void adjustDownToUp(int[] array,int k,int length){
+12         int temp = array[k];
+13         for(int i=2*k+1; i<length-1; i=2*i+1){    //i为初始化为节点k的左孩子，沿节点较大的子节点向下调整
+14             if(i<length && array[i]<array[i+1]){  //取节点较大的子节点的下标
+15                 i++;   //如果节点的右孩子>左孩子，则取右孩子节点的下标
+16             }
+17             if(temp>=array[i]){  //根节点 >=左右子女中关键字较大者，调整结束
+18                 break;
+19             }else{   //根节点 <左右子女中关键字较大者
+20                 array[k] = array[i];  //将左右子结点中较大值array[i]调整到双亲节点上
+21                 k = i; //【关键】修改k值，以便继续向下调整
+22             }
+23         }
+24         array[k] = temp;  //被调整的结点的值放人最终位置
+25     }
+
+ 1     //堆排序
+ 2     public int[] heapSort(int[] array){
+ 3         array = buildMaxHeap(array); //初始建堆，array[0]为第一趟值最大的元素
+ 4         for(int i=array.length-1;i>1;i--){
+ 5             int temp = array[0];  //将堆顶元素和堆低元素交换，即得到当前最大元素正确的排序位置
+ 6             array[0] = array[i];
+ 7             array[i] = temp;
+ 8             adjustDownToUp(array, 0,i);  //整理，将剩余的元素整理成堆
+ 9         }
+10         return array;
+11     }
+
+删除堆顶元素（即序列中的最大值）：先将堆的最后一个元素与堆顶元素交换，由于此时堆的性质被破坏，需对此时的根节点进行向下调整操作。
+
+
+1     //删除堆顶元素操作
+2     public int[] deleteMax(int[] array){
+3         //将堆的最后一个元素与堆顶元素交换，堆底元素值设为-99999
+4         array[0] = array[array.length-1];
+5         array[array.length-1] = -99999;
+6         //对此时的根节点进行向下调整
+7         adjustDownToUp(array, 0, array.length);
+8         return array;
+9     }
+
+对堆的插入操作：先将新节点放在堆的末端，再对这个新节点执行向上调整操作。
+
+假设数组的最后一个元素array[array.length-1]为空，新插入的结点初始时放置在此处。
+
+复制代码
+复制代码
+ 1     //插入操作:向大根堆array中插入数据data
+ 2     public int[] insertData(int[] array, int data){
+ 3         array[array.length-1] = data; //将新节点放在堆的末端
+ 4         int k = array.length-1;  //需要调整的节点
+ 5         int parent = (k-1)/2;    //双亲节点
+ 6         while(parent >=0 && data>array[parent]){
+ 7             array[k] = array[parent];  //双亲节点下调
+ 8             k = parent;
+ 9             if(parent != 0){
+10                 parent = (parent-1)/2;  //继续向上比较
+11             }else{  //根节点已调整完毕，跳出循环
+12                 break;
+13             }
+14         }
+15         array[k] = data;  //将插入的结点放到正确的位置
+16         return array;
+17     }
+
+测试：
+
+ 1     public void toString(int[] array){
+ 2         for(int i:array){
+ 3             System.out.print(i+" ");
+ 4         }
+ 5     }
+ 6
+ 7     public static void main(String args[]){
+ 8         HeapSort hs = new HeapSort();
+ 9         int[] array = {87,45,78,32,17,65,53,9,122};
+10         System.out.print("构建大根堆：");
+11         hs.toString(hs.buildMaxHeap(array));
+12         System.out.print("\n"+"删除堆顶元素：");
+13         hs.toString(hs.deleteMax(array));
+14         System.out.print("\n"+"插入元素63:");
+15         hs.toString(hs.insertData(array, 63));
+16         System.out.print("\n"+"大根堆排序：");
+17         hs.toString(hs.heapSort(array));
+18     }

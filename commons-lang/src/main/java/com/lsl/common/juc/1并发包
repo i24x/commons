@@ -1,0 +1,19 @@
+HashMap-HashTable
+List-Vector
+Collections.synchronized*
+=================>
+ConcurrentHashMap
+CopyOnWriteArrayList
+CopyOnWriteArraySet
+ConcurrentLinkedQueue//高性能无阻塞无界队列
+
+
+
+ArrayBlockingQueue//有界队列
+LinkedBlockingQueue//阻塞队列
+PriorityBlockingQueue-->T implements Comparable<T> 优先级队列
+LinkedBlockingDeque
+
+
+DelayQueue//延迟队列
+SynchronousQueue

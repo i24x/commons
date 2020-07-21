@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="User">
+    <select id="selectUser" name="测试用例" title="">
+        SELECT * FROM TB_USER
+        WHERE 1 = 1
+        <isNotEmpty property="M1">
+            AND M1 = ${M1}
+            <isNotEmpty property="M2">
+                AND M2 = ${M2}
+            </isNotEmpty>
+        </isNotEmpty>
+        AND M3 = ${M3}
+        <isNotEmpty property="list">
+            <iterate property="list"
+                     prepend="AND CUID IN " open="(" conjunction="," close=")">
+                BRFORE ${list} AFTER
+                NEXT
+            </iterate>
+        </isNotEmpty>
+        AND M4= ${M4}
+    </select>
+</mapper>

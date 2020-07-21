@@ -1,0 +1,12 @@
+server:
+  port: 8071
+
+spring:
+  datasource:
+    druid:
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      username: bigdata_gs
+      password: wwkjbigdata
+      url: jdbc:oracle:thin:@192.168.182.66:1521:gszhlydb
+netty:
+  port: 9005

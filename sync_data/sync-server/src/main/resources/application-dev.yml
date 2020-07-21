@@ -1,0 +1,13 @@
+server:
+  port: 8071
+
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+      url: jdbc:mysql://127.0.0.1:3306/douban?useUnicode=true&characterEncoding=utf-8&useSSL=true
+
+netty:
+  port: 9010

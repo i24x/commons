@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/activiti-workflow/activiti-workflow.iml" filepath="$PROJECT_DIR$/activiti-workflow/activiti-workflow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commons.iml" filepath="$PROJECT_DIR$/commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commons-datastruct/commons-datastruct.iml" filepath="$PROJECT_DIR$/commons-datastruct/commons-datastruct.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commons-lang/commons-lang.iml" filepath="$PROJECT_DIR$/commons-lang/commons-lang.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commons-web/commons-web.iml" filepath="$PROJECT_DIR$/commons-web/commons-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sync_data/sync-client/sync-client.iml" filepath="$PROJECT_DIR$/sync_data/sync-client/sync-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sync_data/sync-server/sync-server.iml" filepath="$PROJECT_DIR$/sync_data/sync-server/sync-server.iml" />
+    </modules>
+  </component>
+</project>

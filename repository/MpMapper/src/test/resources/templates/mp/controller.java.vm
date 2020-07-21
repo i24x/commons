@@ -1,0 +1,80 @@
+package ${package.Controller}import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.alibaba.fastjson.JSON;
+import com.pipi.constant.Constant;
+import com.pipi.model.BootStrapTable;
+
+;
+##
+    ##
+    ##
+    #if(${superControllerClassPackage})${superControllerClassPackage}
+    #    {package.Service}
+        .${table.serviceName}; ${package.Entity}.${entity};
+
+/**
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@RequestMapping("/${package.ModuleName}")
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+#else
+public class ${table.controllerName} {
+#end
+
+@Autowired
+public ${table.serviceName} ${package.ModuleName}Service;
+
+/**
+ * 跳转列表页面
+ * @param request
+ * @return
+ */
+@RequestMapping(method = RequestMethod.GET, value = {"/${table.entityPath}/index" })
+public String index(HttpServletRequest request){
+        return"${table.entityPath}Index" ;
+        }
+
+/**
+ * 保存和修改
+ * @param ${table.entityPath} 实体
+ * @return 0 失败  1 成功
+ */
+@ResponseBody
+@RequestMapping(method = RequestMethod.POST, value = "/")
+public boolean ${table.entityPath}Save(${entity} ${table.entityPath}){
+        return ${package.ModuleName}Service.saveOrUpdate(${table.entityPath});
+        }
+
+/**
+ * 根据id删除对象
+ * @param id  实体ID
+ * @return 0 失败  1 成功
+ */
+@ResponseBody
+@RequestMapping(method = RequestMethod.DELETE, value = "/${table.entityPath}/{id}")
+public boolean ${table.entityPath}Delete(Long id){
+        return ${package.ModuleName}Service.removeById(id);
+        }
+
+/**
+ * 查询所有用户
+ */
+@ResponseBody
+@RequestMapping(method = RequestMethod.GET, value = "/list")
+public List<${entity}> selectAll(){
+        return ${package.ModuleName}Service.list();
+        }
+        }

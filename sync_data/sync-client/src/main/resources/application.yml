@@ -1,0 +1,39 @@
+receive:
+  ip: 127.0.0.1
+  port: 8072
+  tables: bd_weather_pm25,hd_sluc_count_dest
+  columns: pm_id,aqi,area_code,cid,co,location,main,no2,o3,pm10,pm25,pub_time,qlty,so2,add_time#count_dest_id,source_area_code,dest_area_code,count_date,cut_num,is_flag,add_time
+  conditions: (area_code=620400)#(dest_area_code=620400)
+  syncColumn: add_time
+sync:
+  time: 0 20 21 * * ?
+  change: -180
+
+task:
+  size: 10
+
+server:
+  port: 8081
+spring:
+  profiles:
+    active: dev
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+      url: jdbc:mysql://127.0.0.1:3306/bigdata_data?useUnicode=true&characterEncoding=utf-8&useSSL=true
+
+#jasypt加密的密匙
+jasypt:
+  encryptor:
+    password: NcQkWcPTf4APOwVLfsbJ9yHpNPPkEcYJ
+
+#logging:
+#  config: classpath:logback.xml
+#  level:
+#    root: INFO
+#    org.hibernate: INFO
+#    org.hibernate.type.descriptor.sql.BasicExtractor: INFO
+#    com.ys.adage.mapper: INFO
+#    org.springframework: INFO

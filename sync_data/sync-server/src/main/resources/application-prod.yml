@@ -1,0 +1,14 @@
+#中心平台
+server:
+  port: 8010
+
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: ENC(01z6J4VEY2vNKH2Op9UDsOQJeerJ0Kmx)
+      password: ENC(+Buvk8atr5wS0inQsBATEwu3lKJfpxeS)
+      url: ENC(uPvu5wr48GuMz3o6nYa0ieJwzSbTmNE6Q4UZE3G67WapF3LTuKl1r3bYw9n7eBEWVtwrioM905xv+z7oWZEgfaCcv9sKV6Z7sdWfQNgU8Q+uiHnsW7+u5fnWNr18dk95WGrHBDpzKdI=)
+
+netty:
+  port: 9010

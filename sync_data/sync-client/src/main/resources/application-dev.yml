@@ -1,0 +1,23 @@
+receive:
+  ip: 127.0.0.1
+  port: 9010
+  tables: event_statics as hmy_event_statics,pom_sentiment_recent as hmy_pom_sentiment_recent
+  columns: city_code,execute_date,daily_total,daily_yesterday,daily_percent,daily_trend,history_good_total,history_good_yesterday,history_good_percent,history_bad_total,history_bad_yesterday,history_bad_percent,history_neutral_total,history_neutral_yesterday,history_neutral_percent,history_sick_total,history_sick_yesterday,history_sick_percent,history_sick_trend,statistics_date,create_time#id,title,medianame,sentiment,url,hex(url) as url_hex,outbreak,area_code,area_name,event_id,countdate,releasedate
+  conditions: ( 1=1 )#( 1=1 )
+  syncColumn: create_time,countdate
+sync:
+  time: 0 4 21 * * ?
+  change: -180
+
+task:
+  size: 10
+
+server:
+  port: 8081
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+      url: jdbc:mysql://127.0.0.1:3306/bigdata_data?useUnicode=true&characterEncoding=utf-8&useSSL=true
