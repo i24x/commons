@@ -22,6 +22,7 @@
         <module>commons-lang</module>
         <module>commons-web</module>
         <module>commons-datastruct</module>
+        <module>commons-net</module>
     </modules>
 
 

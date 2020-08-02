@@ -10,8 +10,8 @@ public class ExceptionFactoryRegister {
     static {
         exceptions.add(new BizException());
         exceptions.add(new BizRuntimeException());
-        exceptions.add(new FrameWorkException());
-        exceptions.add(new FrameWorkRuntimeException());
+        exceptions.add(new SystemException());
+        exceptions.add(new SystemRuntimeException());
     }
 
     public static BaseException getException(String code) {

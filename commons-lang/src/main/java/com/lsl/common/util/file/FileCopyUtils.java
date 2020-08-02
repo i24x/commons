@@ -1,6 +1,6 @@
 package com.lsl.common.util.file;
 
-import com.lsl.common.vm.mbean.VmConfig;
+import com.lsl.common.jvm.management.VmConfig;
 
 import java.io.*;
 import java.nio.file.Files;
